@@ -1,0 +1,21 @@
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Set the base URL to match your project directory
+    RewriteBase /dbs
+
+    # Redirect all requests to the index.php file
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# Set PHP settings
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 50M
+    php_value post_max_size 50M
+</IfModule>
+
+
+
