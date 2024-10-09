@@ -3,14 +3,7 @@
 class UserModel
 {
   private $dbh;
-  public $url = "https://hrms.iauoffsa.us";
-
-  public function getapi()
-  {
-
-    $this->url = "https://hrms.iauoffsa.us";
-  }
-
+  private $url = "https://hrms.iauoffsa.us";  // Default URL
 
   public function __construct()
   {
@@ -18,11 +11,16 @@ class UserModel
     $this->dbh = $dbh;
   }
 
-  // Method to retrieve user details by username
+  // Method to set a new URL using getApi
+  public function getApi($url)
+  {
+    $this->url = $url;
+  }
 
+  // Method to get all users with role information
   public function getAllUserApi($token)
   {
-    $url = 'https://hrms.iauoffsa.us/api/v1/users/';
+    $url = $this->url . '/api/v1/users/';  // Use $this->url dynamically
 
     // Initialize cURL session
     $ch = curl_init($url);
@@ -85,9 +83,10 @@ class UserModel
     }
   }
 
+  // Method to authenticate user
   public function authenticateUser($email, $password)
   {
-    $url = 'https://hrms.iauoffsa.us/api/login';
+    $url = $this->url . '/api/login';  // Use $this->url dynamically
     $data = json_encode(['email' => $email, 'password' => $password]);
 
     $ch = curl_init($url);
@@ -122,7 +121,6 @@ class UserModel
     }
 
     if ($httpCode === 200 && isset($responseData['user'], $responseData['token'])) {
-      // Password is assumed to be hashed and verified internally by the API
       return [
         'http_code' => $httpCode,
         'user' => $responseData['user'],
@@ -137,10 +135,10 @@ class UserModel
     }
   }
 
+  // Method to get role by ID
   public function getRoleApi($roleId, $token)
   {
-    // Construct the API URL using the roleId
-    $url = $this->url . "/api/v1/roles/";
+    $url = $this->url . "/api/v1/roles/$roleId";  // Use dynamic $roleId in URL
 
     // Initialize cURL session
     $ch = curl_init();
@@ -179,8 +177,4 @@ class UserModel
       return ['error' => 'HTTP error: ' . $httpcode . ' - Failed to fetch role from API'];
     }
   }
-
-  // public function editdoc($id, $codedoc, $namedoc, $typedoc, $sourcedoc, $file)
-
-
 }

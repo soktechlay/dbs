@@ -3,15 +3,15 @@
 class typeModel
 {
     private $dbh;
-    public $url = "http://127.0.0.1:8000";
+    // public $url = "http://127.0.0.1:8000";
 
     private $types = "types";
 
-    public function getapi()
-    {
+    // public function getapi()
+    // {
 
-        $this->url = "http://127.0.0.1:8000";
-    }
+    //     $this->url = "http://127.0.0.1:8000";
+    // }
 
     public function __construct()
     {

@@ -3,13 +3,13 @@
 class documentModel
 {
     private $dbh;
-    public $url = "https://hrms.iauoffsa.us";
+    // public $url = "https://hrms.iauoffsa.us";
 
-    public function getapi()
-    {
+    // public function getapi()
+    // {
 
-        $this->url = "https://hrms.iauoffsa.us";
-    }
+    //     $this->url = "https://hrms.iauoffsa.us";
+    // }
     private $documents = "documents";
 
     public function __construct()
