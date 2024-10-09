@@ -46,7 +46,7 @@ class Authcontroller
 
                         // Fetch position_name and store it in session
                         $position = $userModel->getRoleApi($user['roleId'], $token);
-                        $_SESSION['position'] = $position['data']['roleNameKh'] ;
+                        $_SESSION['position'] = $position['data']['roleNameKh'];
 
                         if ($user['isAdmin'] === 'SUPER_ADMIN') {
                             // Admin-specific session variables
@@ -54,6 +54,7 @@ class Authcontroller
                             $_SESSION['admin_email'] = $user['email'];
                             $_SESSION['admin_name'] = $user['engName'];
                             $_SESSION['admin_profile'] = 'https://hrms.iauoffsa.us/images/' . $user['image'];
+                            
                         }
 
                         header('Location: /dbs/dashboard');

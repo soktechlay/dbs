@@ -60,7 +60,8 @@ include('src/includes/header.php');
                             </div>
                             <!-- Display document count -->
                             <div class="text-primary text-center mt-2">
-                                <h4><?php echo $department['document_count'] ?? 0; ?> ឯកសារ</h4>
+                            <h4><span style="color: red;"><?php echo $department['document_count'] ?? 0; ?></span> ឯកសារ</h4>
+
                             </div>
                         </div>
                     </div>
@@ -99,7 +100,7 @@ include('src/includes/header.php');
                 </div>
                 <!-- Input field for search -->
                 <div class="col-md-3 mb-3">
-                    <input type="text" name="search_query" placeholder="ស្វែងរកតាមរយៈកូដឬឈ្មោះឯកសារ"
+                    <input type="text" name="search_query" placeholder="ស្វែងរកតាមរយៈលេខកូដឬឈ្មោះឯកសារ"
                         class="form-control">
                 </div>
                 <!-- Form for date range -->
@@ -109,7 +110,7 @@ include('src/includes/header.php');
                 </div>
                 <!-- Submit button -->
                 <div class="col-md-1 justify-content-end">
-                    <button type="submit" class="btn btn-secondary">ស្វែងរក</button>
+                    <button type="submit" class="btn btn-success">ស្វែងរក</button>
                 </div>
             </div>
         </form>
@@ -123,7 +124,7 @@ include('src/includes/header.php');
         <div class="row">
             <div class="col-12 col-md-3"></div>
             <div class="col-12 col-md-6 text-center">
-                <div class="h2">Internal Audit Unit Database System</div>
+                <div class="h2">ប្រព័ន្ធរក្សាទុកទិន្នន័យព័ត៌មាន</div>
             </div>
         </div>
         <!-- Show data -->
@@ -300,9 +301,9 @@ include('src/includes/header.php');
                     "first": "ទីមួយ",
                     "last": "ចុងក្រោយ",
                     "next": "បន្ទាប់",
-                    "previous": "ត្រឡប់ក្រោយ"
+                    "previous": "ត្រលប់ក្រោយ"
                 },
-                "emptyTable": "គ្មានទិន្នន័យនៅក្នុងតារាង"
+                "emptyTable": "<span style='color:red;'>មិនមានទិន្នន័យនៅក្នុងតារាង</span>" // Set red color for empty table message
             }
         });
     });

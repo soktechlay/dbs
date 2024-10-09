@@ -83,11 +83,12 @@ $userId = $_SESSION['user_id'];
                             alt="User Avatar" class="avatar avatar-sm rounded-circle me-2">
                         <div class="d-none d-xl-block">
                             <div><?php echo htmlspecialchars($_SESSION['user_khmer_name'] ?? ''); ?></div>
+                           
                             <small class="text-secondary"> <?= $_SESSION['position'] ; ?></small>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a href="/dbs/logout" class="dropdown-item">Logout</a>
+                        <a href="/dbs/logout" class="dropdown-item">ចាក់ចេញ</a>
                     </div>
                 </li>
 

@@ -137,8 +137,9 @@ class UserModel
 
   // Method to get role by ID
   public function getRoleApi($roleId, $token)
-  {
-    $url = $this->url . "/api/v1/roles/$roleId";  // Use dynamic $roleId in URL
+{
+    // Construct the API URL using the roleId
+    $url = $this->url . "/api/v1/roles/" . urlencode($roleId); // Append roleId to the URL
 
     // Initialize cURL session
     $ch = curl_init();
@@ -147,8 +148,8 @@ class UserModel
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-      'Authorization: Bearer ' . $token,  // Pass the token for authentication
-      'Content-Type: application/json'
+        'Authorization: Bearer ' . $token,  // Pass the token for authentication
+        'Content-Type: application/json'
     ]);
 
     // Execute the cURL request
@@ -157,9 +158,9 @@ class UserModel
 
     // Check for cURL errors
     if (curl_errno($ch)) {
-      $error_msg = curl_error($ch);
-      curl_close($ch);
-      return ['error' => 'cURL error: ' . $error_msg]; // Handle cURL errors
+        $error_msg = curl_error($ch);
+        curl_close($ch);
+        return ['error' => 'cURL error: ' . $error_msg]; // Handle cURL errors
     }
 
     // Close the cURL session
@@ -167,14 +168,15 @@ class UserModel
 
     // Process the response
     if ($httpcode == 200) {
-      $result = json_decode($response, true);
-      if (isset($result['data']['roleNameKh'])) {
-        return $result; // Return the role data
-      } else {
-        return ['error' => 'API response format is incorrect'];
-      }
+        $result = json_decode($response, true);
+        if (isset($result['data']['roleNameKh'])) {
+            return $result; // Return the role data
+        } else {
+            return ['error' => 'API response format is incorrect'];
+        }
     } else {
-      return ['error' => 'HTTP error: ' . $httpcode . ' - Failed to fetch role from API'];
+        return ['error' => 'HTTP error: ' . $httpcode . ' - Failed to fetch role from API'];
     }
-  }
+}
+
 }
