@@ -3,14 +3,14 @@
 class departmentModel
 {
     private $dbh;
-    public $url = "http://127.0.0.1:8000";
+    public $url = "https://hrms.iauoffsa.us";
 
     private $departments = "departments";
 
     public function getapi()
     {
 
-        $this->url = "http://127.0.0.1:8000";
+        $this->url = "https://hrms.iauoffsa.us";
     }
 
     public function __construct()

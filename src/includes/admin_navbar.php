@@ -60,7 +60,7 @@
                         </div>
                         <div class="list-group list-group-flush">
                             <!-- Notification Item -->
-                            <a href="#" class="list-group-item list-group-item-action">
+                            <!-- <a href="#" class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1">Example 1</h6>
                                     <small>3 min ago</small>
@@ -87,7 +87,7 @@
                                     <small>1 hour ago</small>
                                 </div>
                                 <p class="mb-1">Regenerate package-lock.json (#29730)</p>
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                 </li>

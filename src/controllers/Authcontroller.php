@@ -42,7 +42,7 @@ class Authcontroller
                         $_SESSION['user_khmer_name'] = $user['lastNameKh'] . ' ' . $user['firstNameKh'];
                         $_SESSION['user_eng_name'] = $user['engName'];
                         $_SESSION['token'] = $token;
-                        $_SESSION['user_profile'] = 'http://127.0.0.1:8000/images/' . $user['image'];
+                        $_SESSION['user_profile'] = 'https://hrms.iauoffsa.us/images/' . $user['image'];
 
                         // Fetch position_name and store it in session
                         $position = $userModel->getRoleApi($user['roleId'], $token);
@@ -53,7 +53,7 @@ class Authcontroller
                             $_SESSION['admin_id'] = $user['id'];
                             $_SESSION['admin_email'] = $user['email'];
                             $_SESSION['admin_name'] = $user['engName'];
-                            $_SESSION['admin_profile'] = 'http://127.0.0.1:8000/images/' . $user['image'];
+                            $_SESSION['admin_profile'] = 'https://hrms.iauoffsa.us/images/' . $user['image'];
                         }
 
                         header('Location: /dbs/dashboard');

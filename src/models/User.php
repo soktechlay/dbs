@@ -3,12 +3,12 @@
 class UserModel
 {
   private $dbh;
-  public $url = "http://127.0.0.1:8000";
+  public $url = "https://hrms.iauoffsa.us";
 
   public function getapi()
   {
 
-    $this->url = "http://127.0.0.1:8000";
+    $this->url = "https://hrms.iauoffsa.us";
   }
 
 
@@ -22,7 +22,7 @@ class UserModel
 
   public function getAllUserApi($token)
   {
-    $url = 'http://127.0.0.1:8000/api/v1/users/';
+    $url = 'https://hrms.iauoffsa.us/api/v1/users/';
 
     // Initialize cURL session
     $ch = curl_init($url);
@@ -87,7 +87,7 @@ class UserModel
 
   public function authenticateUser($email, $password)
   {
-    $url = 'http://127.0.0.1:8000/api/login';
+    $url = 'https://hrms.iauoffsa.us/api/login';
     $data = json_encode(['email' => $email, 'password' => $password]);
 
     $ch = curl_init($url);

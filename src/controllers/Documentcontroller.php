@@ -97,7 +97,7 @@ class Documentcontroller
             // Check if a new file is uploaded
             if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
                 // Define the target directory where the file will be stored
-                $targetDir = "public/uploads/";
+                $targetDir = "/public/uploads/";
                 $fileName = basename($_FILES["file"]["name"]);
                 $targetFilePath = $targetDir . $fileName;
 
@@ -151,7 +151,7 @@ class Documentcontroller
 
     private function createDocument()
     {
-        // Check for file upload errors
+        // Check if file upload has errors
         if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
             $errorCode = $_FILES['file']['error'];
             switch ($errorCode) {
@@ -183,38 +183,40 @@ class Documentcontroller
             exit;
         }
 
+        // Validate and sanitize input data
+        $code = htmlspecialchars(trim($_POST['codedoc']));
+        $name = htmlspecialchars(trim($_POST['namedoc']));
+        $type = htmlspecialchars(trim($_POST['typedoc']));
+        $source = htmlspecialchars(trim($_POST['sourcedoc']));
 
-        // Continue with the rest of your document creation logic
+        // Instantiate the document model
         $documentModel = new documentModel();
-        $code = $_POST['codedoc'];
-        $name = $_POST['namedoc'];
-        $type = $_POST['typedoc'];
-        $source = $_POST['sourcedoc'];
+
+        // Check if codedoc already exists
+        if ($documentModel->codedocExists($code)) {
+            $_SESSION['error'] = 'លេខកូដឯកសារមានរួចហើយ!';
+            header('Location: /dbs/createdocument');
+            exit;
+        }
 
         // File upload setup
         $targetDir = "public/uploads/";
         $fileName = basename($_FILES["file"]["name"]);
         $targetFilePath = $targetDir . $fileName;
-        $uploadOk = true;
-
-        // Check if codedoc already exists
-        if ($documentModel->codedocExists($code)) {
-            $_SESSION['error'] = 'លេខកូដឯកសារមានរួចហើយ!';
-            $uploadOk = false;
-        }
 
         // Check if file type is valid
         $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
         $allowedTypes = ['jpg', 'png', 'pdf', 'doc', 'docx'];
         if (!in_array($fileType, $allowedTypes)) {
             $_SESSION['error'] = 'Invalid file type.';
-            $uploadOk = false;
+            header('Location: /dbs/createdocument');
+            exit;
         }
 
-        // Attempt file upload if everything is OK
-        if ($uploadOk && move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
+        // Try to move the uploaded file to the target directory
+        if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
             // Save document data to the database
-            $result = $documentModel->createdocument([
+            $result = $documentModel->createDocument([
                 'codedoc' => $code,
                 'namedoc' => $name,
                 'typedoc' => $type,
@@ -228,7 +230,7 @@ class Documentcontroller
                 $_SESSION['error'] = "មានបញ្ហាក្នុងការបង្កើតប្រភេទឯកសារ!";
             }
         } else {
-            $_SESSION['error'] = "Error: Failed to upload file.";
+            $_SESSION['error'] = "មានបញ្ហាក្នុងការផ្ទុកឡើងឯកសារ!!";
         }
 
         // Redirect after processing
@@ -236,24 +238,25 @@ class Documentcontroller
         exit;
     }
 
+
     private function getDocuments()
-{
-    $documentModel = new documentModel();
+    {
+        $documentModel = new documentModel();
 
-    // Handle filtering if there are filter criteria
-    $sourcedoc_filter = $_POST['sourcedoc_filter'] ?? null;
-    $typedoc_filter = $_POST['typedoc_filter'] ?? null;
-    $search_query = $_POST['search_query'] ?? null;
-    $date_range = $_POST['date_range'] ?? null;
+        // Handle filtering if there are filter criteria
+        $sourcedoc_filter = $_POST['sourcedoc_filter'] ?? null;
+        $typedoc_filter = $_POST['typedoc_filter'] ?? null;
+        $search_query = $_POST['search_query'] ?? null;
+        $date_range = $_POST['date_range'] ?? null;
 
-    // Fetch filtered documents if any filters are applied
-    if ($sourcedoc_filter || $typedoc_filter || $search_query || $date_range) {
-        return $documentModel->getdoc($sourcedoc_filter, $typedoc_filter, $search_query, $date_range);
+        // Fetch filtered documents if any filters are applied
+        if ($sourcedoc_filter || $typedoc_filter || $search_query || $date_range) {
+            return $documentModel->getdoc($sourcedoc_filter, $typedoc_filter, $search_query, $date_range);
+        }
+
+        // If no filters, fetch all documents
+        return $documentModel->getdoc();
     }
-
-    // If no filters, fetch all documents
-    return $documentModel->getdoc();
-}
 
     public function deleteDocument()
     {
