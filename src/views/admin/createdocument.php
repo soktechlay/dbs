@@ -67,7 +67,7 @@ include('src/includes/header.php');
                 </div>
                 <!-- Submit button -->
                 <div class="col-md-1 justify-content-end">
-                    <button type="submit" class="btn btn-secondary">ស្វែងរក</button>
+                    <button type="submit" class="btn btn-Primary">ស្វែងរក</button>
                 </div>
             </div>
         </form>
@@ -83,13 +83,13 @@ include('src/includes/header.php');
 
             <!-- Centered text -->
             <div class="col-12 col-md-6 text-center">
-                <div class="h2">Internal Audit Unit Database System</div>
+                <div class="h2">ប្រព័ន្ធរក្សាទុកទិន្នន័យព័ត៌មាន</div>
             </div>
 
             <!-- Right-aligned text -->
             <div class="col-12 col-md-3 d-flex align-items-center justify-content-end">
                 <div class="btn-list">
-                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-report">
+                    <a href="#" class="btn btn-Success" data-bs-toggle="modal" data-bs-target="#modal-report">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
@@ -383,9 +383,9 @@ include('src/includes/header.php');
                                                                     </path>
                                                                     <path d="M12 16h.01"></path>
                                                                 </svg>
-                                                                <h3>តើអ្នកប្រាកដទេ?</h3>
-                                                                <div class="text-secondary">តើអ្នកពិតជាចង់លុបមែនទេ?
-                                                                    អ្វីដែលអ្នកបានលុបមិនអាចត្រឡប់មកវិញបានទេ។</div>
+                                                                <h3>តើអ្នកពិតជាចង់លុបឯកសារនេះមែនទេ??</h3>
+                                                                <div class="text-secondary">
+                                                                    ឯកសារដែលបានលុបហើយមិនអាចយកមកវិញបានទេ!</div>
                                                             </div>
                                                             <div class="modal-footer bg-light">
                                                                 <div class="w-100">
