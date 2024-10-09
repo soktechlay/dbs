@@ -19,7 +19,7 @@ include('src/includes/header.php');
             <div class="col-12 d-flex align-items-center justify-content-between mb-3">
                 <!-- Display the user's full name -->
                 <h3 class="mb-0">
-                    <span class="mef2 text-primary mx-2 me-0 mb-0">
+                    <span class="mef2 text-red mx-2 me-0 mb-0">
                         បង្កើតឯកសារ
                     </span>
                 </h3>
